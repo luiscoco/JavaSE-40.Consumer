@@ -1,19 +1,21 @@
 # JavaSE-Consumer
 
-In Java, java.util.function.Consumer is a functional interface introduced in Java 8 as part of the Java.util.function package. It represents an operation that takes a single input argument and returns no result. Its main use is to consume or process the input without returning any value.
+In Java, java.util.function.Consumer is a functional interface introduced in Java 8 as part of the Java.util.function package. 
+
+It represents an operation that takes a single input argument and returns no result. Its main use is to consume or process the input without returning any value.
 
 The Consumer interface has a single abstract method called accept, which takes one argument and performs the operation on it. Here's the method signature:
 
-java
-Copy code
+```java
 @FunctionalInterface
 public interface Consumer<T> {
     void accept(T t);
 }
+```
+
 Let's look at a simple example to illustrate how Consumer can be used. Suppose you want to print each element of a list:
 
-java
-Copy code
+```java
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -29,28 +31,27 @@ public class ConsumerExample {
         fruits.forEach(printConsumer);
     }
 }
-In this example, the Consumer is used to define a lambda expression (fruit) -> System.out.println(fruit), which simply prints the input argument. The forEach method is then used on the List to apply this Consumer to each element of the list.
+```
+
+In this example, the Consumer is used to define a lambda expression (fruit) -> System.out.println(fruit), which simply prints the input argument. 
+
+The forEach method is then used on the List to apply this Consumer to each element of the list.
 
 You can also simplify the code using method reference:
 
-java
-Copy code
+```java
 fruits.forEach(System.out::println);
+```
+
 Here, System.out::println is a method reference that refers to the println method of the PrintStream class, and it serves as a shorthand for the lambda expression (fruit) -> System.out.println(fruit).
 
-I hope this helps! Let me know if you have further questions or if you'd like more examples.
+# More samples
 
+Here are a few more examples of using Consumer in different scenarios:
 
+## Example 1: Modifying Elements in a List
 
-
-User
-can you provide me more sample
-ChatGPT
-Certainly! Here are a few more examples of using Consumer in different scenarios:
-
-Example 1: Modifying Elements in a List
-java
-Copy code
+```java
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -69,9 +70,10 @@ public class ConsumerExample {
         numbers.forEach(squareConsumer);
     }
 }
-Example 2: Updating Elements in a Map
-java
-Copy code
+```
+
+## Example 2: Updating Elements in a Map
+```java
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -95,9 +97,11 @@ public class ConsumerExample {
         ageMap.entrySet().forEach(ageUpdater);
     }
 }
-Example 3: Custom Consumer for File Processing
-java
-Copy code
+```
+
+## Example 3: Custom Consumer for File Processing
+
+```java
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -117,21 +121,21 @@ public class FileProcessor {
         Files.lines(filePath).forEach(lineProcessor);
     }
 }
-These examples demonstrate how Consumer can be used in various scenarios, such as transforming elements in a list, updating entries in a map, or processing lines in a file. Feel free to ask if you have any questions about these examples!
+```
 
+These examples demonstrate how Consumer can be used in various scenarios, such as transforming elements in a list, updating entries in a map, or processing lines in a file. 
 
+# More advance topics about  "Consumer" in Java
 
+Let's delve into some more advanced topics related to the Consumer interface in Java.
 
-User
-can you explain me more advance topics about  "Consumer" in Java
-ChatGPT
-Certainly! Let's delve into some more advanced topics related to the Consumer interface in Java.
+## 1. Chaining Consumers with andThen Method:
 
-1. Chaining Consumers with andThen Method:
-The Consumer interface has a default method called andThen. This method allows you to combine two Consumer instances to form a chain. The andThen method returns a new Consumer that performs the operations of both original consumers in sequence.
+The Consumer interface has a default method called andThen. This method allows you to combine two Consumer instances to form a chain. 
 
-java
-Copy code
+The andThen method returns a new Consumer that performs the operations of both original consumers in sequence.
+
+```java
 import java.util.function.Consumer;
 
 public class ChainingConsumers {
@@ -149,13 +153,19 @@ public class ChainingConsumers {
         combinedConsumer.accept("hello");
     }
 }
-In this example, combinedConsumer is a result of chaining two consumers (toUppercase and printLength). When you apply this combined consumer to a string, it first converts the string to uppercase and then prints its length.
+```
 
-2. Exception Handling with Consumer and Exception Interface:
-When working with Consumer, you may want to handle exceptions that can occur during the execution of the accept method. Java 8 introduced the Exception functional interface, which can be used to handle checked exceptions within lambdas.
+In this example, combinedConsumer is a result of chaining two consumers (toUppercase and printLength).
 
-java
-Copy code
+When you apply this combined consumer to a string, it first converts the string to uppercase and then prints its length.
+
+## 2. Exception Handling with Consumer and Exception Interface:
+
+When working with Consumer, you may want to handle exceptions that can occur during the execution of the accept method. 
+
+Java 8 introduced the Exception functional interface, which can be used to handle checked exceptions within lambdas.
+
+```java
 import java.util.function.Consumer;
 
 public class ExceptionHandlingConsumer {
@@ -187,4 +197,6 @@ public class ExceptionHandlingConsumer {
         void accept(T t) throws E;
     }
 }
+```
+
 In this example, the wrapperConsumer method takes a ThrowingConsumer (a consumer that can throw an exception), and it wraps it with exception handling to catch and print any exceptions that occur during the execution.
